@@ -1,5 +1,6 @@
 #!/usr/bin/with-contenv bashio
 set -e
+__BASHIO_ADDON_CONFIG=$(bashio::addon.config)
 OPTIONS=$(bashio::jq "${__BASHIO_ADDON_CONFIG}" '.options | map("\(.name)=\(.value|tostring)") | [.[] | "--set "  + .] |  join(" ")')
 HOST=$(bashio::host.hostname)
 
