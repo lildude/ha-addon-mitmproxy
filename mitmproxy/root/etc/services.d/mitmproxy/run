@@ -1,4 +1,6 @@
 #!/usr/bin/with-contenv bashio
+# -*- bash -*-
+# shellcheck shell=bash
 set -e
 __BASHIO_ADDON_CONFIG=$(bashio::addon.config)
 OPTIONS=$(bashio::jq "${__BASHIO_ADDON_CONFIG}" '.options | map("\(.name)=\(.value|tostring)") | [.[] | "--set "  + .] |  join(" ")')
@@ -14,5 +16,5 @@ mitmweb $OPTIONS \
   --set 'confdir=/data/mitmproxy' \
   --set 'onboarding_port=8082' \
   --set "onboarding_host=$HOST" \
-  --set 'web_open_browser=false'
+  --set 'web_open_browser=false' \
   --no-web-open-browser
